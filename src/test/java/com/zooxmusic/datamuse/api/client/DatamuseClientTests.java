@@ -1,7 +1,5 @@
 package com.zooxmusic.datamuse.api.client;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.zooxmusic.datamuse.api.config.AppConfig;
 import com.zooxmusic.datamuse.api.model.DatamuseResult;
 import org.junit.jupiter.api.Test;
