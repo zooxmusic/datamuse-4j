@@ -4,6 +4,8 @@ package com.zooxmusic.datamuse.api.client.v1;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zooxmusic.datamuse.api.client.v1.builder.Query;
+import com.zooxmusic.datamuse.api.client.v2.DataMuseQuery;
+import com.zooxmusic.datamuse.api.client.v2.Endpoint;
 import com.zooxmusic.datamuse.api.model.DatamuseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -154,9 +156,10 @@ public class DatamuseClient {
         //return getJSON("http://api.datamuse.com/sug?s=" + s);
     }
 
-    public Collection<DatamuseResult> getResult(String url) {
+    public Collection<DatamuseResult> getResult(final Endpoint endpoint) {
+
         String json = WebClient.create().get()
-                .uri(url)
+                .uri(endpoint.qs(this.datamuseUrl))
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();

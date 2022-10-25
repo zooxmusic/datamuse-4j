@@ -41,6 +41,9 @@ public class Metadata extends SingleType {
         super(term);
     }
 
+    public static Metadata create(final String values) {
+        return new Metadata(values);
+    }
     @Override
     public String getCommand() {
         return "md";

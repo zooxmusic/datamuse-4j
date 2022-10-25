@@ -3,25 +3,30 @@ package com.zooxmusic.datamuse.api.client.v1;
 import com.zooxmusic.datamuse.api.client.v2.*;
 import com.zooxmusic.datamuse.api.config.AppConfig;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.UnsupportedEncodingException;
+import java.util.Collection;
 
 @SpringBootTest(classes = AppConfig.class)
 public class WordTest {
 
+    @Autowired
+    private DataMuseClient dataMuseClient;
+
     @Test
     public void testWordQuery() {
 
-        Words words = DataMuseQuery.words();
-        words.addType(new Rhymes("shitake"));
-        words.addType(new MeansLike("your ass"));
-        words.addType(new English());
+        Words words = Words.builder()
+                .approximateRhymes("electric")
+                .english()
+                .metadata(Metadata.create("srfdp"))
+                .max(20)
+                .build();
 
-        try {
-            System.out.println(words.qs("http://api.datamuse.com/"));
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
+        Collection<DataMuseResult> results = dataMuseClient.query(words);
+        for(DataMuseResult result : results) {
+            System.out.println(result);
         }
 
     }
