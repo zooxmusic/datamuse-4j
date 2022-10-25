@@ -1,17 +1,20 @@
-package com.zooxmusic.datamuse.api.client;
+package com.zooxmusic.datamuse.api.client.v1;
 
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.zooxmusic.datamuse.api.client.v1.builder.Query;
 import com.zooxmusic.datamuse.api.model.DatamuseResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -26,6 +29,13 @@ import java.util.Collection;
 @Component
 public class DatamuseClient {
 
+    @Autowired
+    private UriComponentsBuilder uriComponentsBuilder;
+
+    @PostConstruct
+    public void init() {
+        Query.init(uriComponentsBuilder);
+    }
     @Value("${datamuse.url}")
     private String datamuseUrl;
 

@@ -1,9 +1,6 @@
-package com.zooxmusic.datamuse.api.client;
+package com.zooxmusic.datamuse.api.client.v1;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponents;
@@ -40,13 +37,15 @@ public class DatamuseQuery {
 
         private String value;
         private RelatedWordsTypes(String value) {
-            this.value = value;
+            this.value = String.format("rel_%s", value);
         }
     }
+
     enum Types {
         MeansLike("ml"),
         SoundsLike("sl"),
         SpelledLike("sp"),
+
         Vocabulary("v"),
         Topics("topics"),
         LeftContext("lc"),
@@ -82,6 +81,7 @@ public class DatamuseQuery {
     public static DatamuseQueryBuilder builder(final UriComponentsBuilder uriComponentsBuilder) {
         return new DatamuseQueryBuilder(uriComponentsBuilder);
     }
+
     public static class DatamuseQueryBuilder {
 
         private long created;

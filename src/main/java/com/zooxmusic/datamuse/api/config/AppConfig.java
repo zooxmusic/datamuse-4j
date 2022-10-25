@@ -1,6 +1,6 @@
 package com.zooxmusic.datamuse.api.config;
 
-import com.zooxmusic.datamuse.api.client.DatamuseClient;
+import com.zooxmusic.datamuse.api.client.v1.DatamuseClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,0 +1,9 @@
+
+def builder = new IntegrationBuilder()
+
+def flow = builder.messageFlow {
+    transform {"hello, $it"}
+    handle {println it}
+}
+
+flow.send('world')
